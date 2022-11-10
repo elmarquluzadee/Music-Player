@@ -1,3 +1,13 @@
+.logo-icon {
+    font-size: 35px;
+    margin-right: 5px;
+}
+
+.card-header {
+    margin-top: 10px;
+    background-color: #FFACC7;
+}
+
 .card img {
     /* height: auto; */
     /* width: 300px; */
@@ -7,22 +17,28 @@
 }
 
 .card {
-    border-radius: 20px, 0px;
+    border-radius: 0px !important;
     background-color: #cfd2cf44;
 }
 
 .control {
     border-top: 1px solid rgba(112, 128, 144, 0.603);
+
 }
 
 .controls i {
-    margin: 10px 20px 10px 20px;
+    margin-left: 15px;
+    margin-right: 15px;
     font-size: 25px;
     cursor: pointer;
 }
 
 .controls {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 
-    margin-top: 10px;
-    margin-bottom: 10px;
+
+.list-group {
+    border-radius: 0%;
 }

@@ -1,5 +1,5 @@
+//main structure
 class Music{
-
     constructor(title,singer,img,file){
         this.title = title;
         this.singer = singer;
@@ -7,7 +7,7 @@ class Music{
         this.file = file;
     };
     getName(){
-        return this.title + " - " + this.singer;
+        return this.singer + " - " + this.title;
     }
 };
 
@@ -17,4 +17,62 @@ const musicList = [
     new Music("Dua Lipa","One Kiss","2.jpg","2.mp3")
 ];
 
+//control 
 
+class MusicPlayer{
+    constructor(musicList){
+        this.musicList = musicList;
+        this.index = 1;
+    }
+    getMusic(){
+        return this.musicList[this.index];
+    }
+    next(){
+        if(this.index + 1 != this.musicList.length)
+        {
+            this.index ++;
+        }else
+        {
+            this.index = 0;
+         }}; 
+
+    prev(){
+        if(this.index !=0){
+        this.index--;
+         }else{
+        this.index = this.musicList.length - 1;
+         }};
+}
+
+const player = new MusicPlayer(musicList);
+
+
+//app
+
+const prev = document.querySelector("#prev");
+const play = document.querySelector("#play");
+const next = document.querySelector("#next");
+const singer = document.querySelector(".singer");
+const title = document.querySelector(".title");
+const image = document.querySelector(".music-image");
+
+play.addEventListener("click",function(){
+   
+});
+
+
+window.addEventListener("load",()=>{
+    let music = player.getMusic();
+    displayMusic(music);
+});
+
+function displayMusic(music){
+  title.innerText = music.getName();
+//   singer.innerText = music.singer;
+  image.src = "img/" + music.img;
+  audio.src = "mp3/" + music.file;
+};
+
+play.addEventListener("click",()=>{
+    audio.play();
+});

@@ -22,7 +22,7 @@ const musicList = [
 class MusicPlayer{
     constructor(musicList){
         this.musicList = musicList;
-        this.index = 1;
+        this.index = 2;
     }
     getMusic(){
         return this.musicList[this.index];
@@ -42,7 +42,7 @@ class MusicPlayer{
          }else{
         this.index = this.musicList.length - 1;
          }};
-}
+};
 
 const player = new MusicPlayer(musicList);
 
@@ -55,24 +55,34 @@ const next = document.querySelector("#next");
 const singer = document.querySelector(".singer");
 const title = document.querySelector(".title");
 const image = document.querySelector(".music-image");
+const container = document.querySelector(".container");
 
-play.addEventListener("click",function(){
-   
-});
 
+function displayMusic(music){
+ title.innerText = music.getName();
+//   singer.innerText = music.singer;
+  image.src = "img/" + music.img;
+  audio.src = "mp3/" + music.file;
+};
 
 window.addEventListener("load",()=>{
     let music = player.getMusic();
     displayMusic(music);
 });
 
-function displayMusic(music){
-  title.innerText = music.getName();
-//   singer.innerText = music.singer;
-  image.src = "img/" + music.img;
-  audio.src = "mp3/" + music.file;
+play.addEventListener("click",()=>{
+    const isMusicPlay = container.classList.contains("playing");
+    isMusicPlay ? pauseMusic() : playMusic();
+});
+
+function pauseMusic(){
+    container.classList.remove("playing");
+    play.classList = "fa-solid fa-pause "
+    audio.pause();
 };
 
-play.addEventListener("click",()=>{
+function playMusic(){
+    container.classList.add("playing");
+    play.classList = "fa-solid fa-play"
     audio.play();
-});
+};

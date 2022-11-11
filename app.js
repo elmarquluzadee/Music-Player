@@ -22,7 +22,7 @@ const musicList = [
 class MusicPlayer{
     constructor(musicList){
         this.musicList = musicList;
-        this.index = 2;
+        this.index = 0;
     }
     getMusic(){
         return this.musicList[this.index];
@@ -86,3 +86,27 @@ function playMusic(){
     play.classList = "fa-solid fa-play"
     audio.play();
 };
+
+
+
+prev.addEventListener("click",() =>{
+    prevMusic();
+})
+
+function prevMusic (){
+    player.prev();
+    let  music = player.getMusic()
+    displayMusic(music);
+    playMusic();
+}
+
+next.addEventListener("click",() =>{
+    nextMusic();
+})
+
+function nextMusic (){
+    player.next();
+    let  music = player.getMusic()
+    displayMusic(music);
+    playMusic();
+}

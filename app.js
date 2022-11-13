@@ -28,7 +28,7 @@ class MusicPlayer{
         return this.musicList[this.index];
     }
     next(){
-        if(this.index + 1 != this.musicList.length)
+        if(this.index + 1 < this.musicList.length)
         {
             this.index ++;
         }else
@@ -61,7 +61,7 @@ const duration = document.querySelector("#duration");
 const progressBar = document.querySelector("#progresBar");
 const volumeBar = document.querySelector("#volume-bar");
 const volume = document.querySelector("#volume");
-
+const ul = document.querySelector("#ul");
  
 function displayMusic(music){
  title.innerText = music.getName();
@@ -73,6 +73,8 @@ function displayMusic(music){
 window.addEventListener("load",()=>{
     let music = player.getMusic();
     displayMusic(music);
+    displayMusicList(player.musicList);
+    isPlayingNow();
 });
 
 play.addEventListener("click",()=>{
@@ -94,17 +96,22 @@ function playMusic(){
 
 prev.addEventListener("click",() =>{
     prevMusic();
+    isPlayingNow();
 })
 
 function prevMusic (){
     player.prev();
     let  music = player.getMusic()
     displayMusic(music);
+  
+    isPlayingNow();
     playMusic();
 }
 
 next.addEventListener("click",() =>{
+  
     nextMusic();
+    isPlayingNow();
 })
 
 function nextMusic (){
@@ -156,10 +163,9 @@ if(value == 0)
 });
 
 volume.addEventListener("click", ()=>{
-    // console.log("aa")
     if(sesDurumu === "sesli"){
      audio.muted = true;
-     sesDurumu = "sessiz";
+     sesDurumu = "sessiz"; 
      volume.classList = "fa-solid fa-volume-xmark";
      volumeBar.value = 0;
     }else{
@@ -170,8 +176,46 @@ volume.addEventListener("click", ()=>{
     }
 })
 
-volumeBar.addEventListener("click",() => {
+const displayMusicList = (list) => 
+{
+    for(let i= 0; i < list.length; i++)
+    {
+        let liTag = ` <li li-index='${i}' onclick = "selectedMusic(this)"  class="list-group-item list-group-item-action d-flex justify-content-between align-items-end ">
+        <span>${list[i].getName()}</span>
+        <span id ="music-${i}"  class="badge bg-primary rounded-pill d-flex align-items-center"></span>
+        <audio class="music-${i}" src = "mp3/${list[i].file}"></audio>
+        </li>`;
+        ul.insertAdjacentHTML("beforeend",liTag)
 
-    
-    // console.log(volumeBar.value)
-});
+        let liAudioDuration = ul.querySelector(`#music-${i}`);
+        let liAudioTag = ul.querySelector(`.music-${i}`);
+
+        liAudioTag.addEventListener("loadeddata",() =>{  
+            liAudioDuration.innerText = calculateTime(liAudioTag.duration);
+        });
+    }
+}
+
+const selectedMusic = (li) =>{
+   
+    player.index = li.getAttribute("li-index");
+    displayMusic(player.getMusic());
+    isPlayingNow();
+    playMusic();
+   
+}
+
+const isPlayingNow = () => {
+    for(let li of ul.querySelectorAll("li")){
+        if(li.classList.contains("playing")){
+            li.classList.remove("playing");
+        }
+        if(li.getAttribute("li-index") == player.index){
+           li.classList.add("playing")
+        }
+    }
+}
+
+audio.addEventListener("ended",() =>{1=
+    nextMusic();
+})

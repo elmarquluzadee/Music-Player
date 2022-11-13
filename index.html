@@ -41,23 +41,36 @@
             <div class="row align-items-center control mx-0">
                 <div class="col-6 d-flex justify-content-center controls ">
                     <i id="prev" class="fa-solid fa-backward-step"></i>
-                    <div class="mx-2 play-div"> <i id="play" class="fa-solid fa-play mx-0"></i></div>
+                    <div class="mx-2 stabilizer"> <i id="play" class="fa-solid fa-play mx-0"></i></div>
                     <i id="next" class="fa-solid fa-forward-step"></i>
                 </div>
                 <div class="col-6 d-flex justify-content-center">
-                    <i class="fa-solid fa-volume-high"></i>
-                    <input class="mx-1 w-50" type="range">
+                    <div class="stabilizer">
+                        <i id="volume" class="fa-solid fa-volume-high"></i>
+                    </div>
+                    <input id="volume-bar" class="mx-1 w-50" type="range" max="100" value="100">
                 </div>
             </div>
         </div>
         <div class="card-footer p-0">
-            <div class="list-group ">
-                <a href="#" class="list-group-item list-group-item-action " aria-current="true">
-                    1
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">2</a>
-                <a href="#" class="list-group-item list-group-item-action">3</a>
-                <!-- <a href="#" class="list-group-item list-group-item-action">A fourth link item</a> -->
+            <div>
+                <ul class="list-group ">
+                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-end">
+                        <span>a</span>
+                        <span class="badge bg-primary rounded-pill d-flex align-items-center">a</span>
+                    </li>
+                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-end">
+                        <span>a</span>
+                        <span class="badge bg-primary rounded-pill d-flex align-items-center">a</span>
+                    </li>
+                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-end ">
+                        <span>a</span>
+                        <span class="badge bg-primary rounded-pill d-flex align-items-center">0.00</span>
+                    </li>
+                </ul>
+
+
+
             </div>
         </div>
     </div>

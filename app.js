@@ -59,7 +59,10 @@ const container = document.querySelector(".container");
 const currentTime = document.querySelector("#current-time");
 const duration = document.querySelector("#duration");
 const progressBar = document.querySelector("#progresBar");
+const volumeBar = document.querySelector("#volume-bar");
+const volume = document.querySelector("#volume");
 
+ 
 function displayMusic(music){
  title.innerText = music.getName();
 //   singer.innerText = music.singer;
@@ -131,4 +134,44 @@ audio.addEventListener("timeupdate",() =>{
 progressBar.addEventListener("input",() => {
     currentTime.textContent = calculateTime(progressBar.value);
     audio.currentTime = progressBar.value;
+});
+
+let sesDurumu = "sesli";
+
+volumeBar.addEventListener("input", (a) =>{
+const value = a.target.value;
+audio.volume = value / 100;
+if(value == 0)
+{
+    audio.muted = true;
+    sesDurumu = "sessiz";
+    volume.classList = "fa-solid fa-volume-xmark";
+  
+}else{
+    audio.muted = false;
+    sesDurumu = "sesli";
+    volume.classList = "fa-solid fa-volume-high";
+  
+}
+});
+
+volume.addEventListener("click", ()=>{
+    // console.log("aa")
+    if(sesDurumu === "sesli"){
+     audio.muted = true;
+     sesDurumu = "sessiz";
+     volume.classList = "fa-solid fa-volume-xmark";
+     volumeBar.value = 0;
+    }else{
+        audio.muted = false;
+        sesDurumu = "sesli";
+        volume.classList = "fa-solid fa-volume-high";
+        volumeBar.value = 50;
+    }
 })
+
+volumeBar.addEventListener("click",() => {
+
+    
+    // console.log(volumeBar.value)
+});

@@ -216,6 +216,6 @@ const isPlayingNow = () => {
     }
 }
 
-audio.addEventListener("ended",() =>{1=
+audio.addEventListener("ended",() =>{
     nextMusic();
 })
